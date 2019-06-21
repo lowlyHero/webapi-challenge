@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const projs = await Proj.get(req.body);
+        const projs = await Proj.get();
         res.status(200).json(projs);
     } catch(error) {
         console.log(error);
@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const projs = await Proj.getProjectActions(req.params.id);
+        const projs = await Proj.get(req.params.id);
         if(projs) {
           res.status(200).json(projs);
         } else {
