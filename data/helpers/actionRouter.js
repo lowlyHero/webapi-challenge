@@ -8,7 +8,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-
+        const action = await Actions.get();
+        res.status(200).json(action);
     } catch(error) {
         console.log(error);
         res.status(500).json({
@@ -19,7 +20,14 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-
+        const action = await Actions.get(req.params.id);
+        if(action) {
+            res.status(200).json(action)
+        } else {
+            res.status(404).json({
+                message: 'Could not find action. Please try again.'
+            })
+        }
     } catch(error) {
         console.log(error);
         res.status(500).json({
