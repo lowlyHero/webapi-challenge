@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
             res.status(200).json(action)
         } else {
             res.status(404).json({
-                message: 'Could not find action. Please try again.'
+                message: 'Action not found. Please try again.'
             })
         }
     } catch(error) {
@@ -64,7 +64,14 @@ router.post('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-
+        const action = await Action.update(req.params.id, req.body);
+        if(action) {
+            res.status(200).json(action);
+        } else {
+            res.status(404).json({
+                message: 'Unable to update action. Please try again.'
+            })
+        }
     } catch(error) {
         console.log(error);
         res.status(500).json({
@@ -77,7 +84,16 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-
+        const delAction = await Action.remove(req.params.id);
+        if(delAction <= 0) {
+            res.status(200).json({
+                message: 'Successfully deleted action.'
+            })
+        } else {
+            res.status(404).json({
+                message: 'Action not found. Please try again.'
+            })
+        }
     } catch(error) {
         console.log(error);
         res.status(500).json({
@@ -86,4 +102,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = actionRouter;
+module.exports = router;
