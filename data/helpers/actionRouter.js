@@ -8,13 +8,13 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const action = await Action.get();
+        const action = await Action.get(query);
         res.status(200).json(action);
     } catch(error) {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot retrieve data.'
-        })
+        });
     }
 });
 
@@ -32,7 +32,7 @@ router.get('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot retrieve data.'
-        })
+        });
     }
 });
 
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot add data.'
-        })
+        });
     }
 });
 
@@ -57,7 +57,7 @@ router.post('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot add data.'
-        })
+        });
     }
 });
 
@@ -77,7 +77,7 @@ router.put('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot update data.'
-        })
+        });
     }
 });
 
@@ -99,7 +99,7 @@ router.delete('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot remove data.'
-        })
+        });
     }
 });
 

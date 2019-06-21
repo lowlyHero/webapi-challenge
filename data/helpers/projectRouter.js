@@ -7,13 +7,13 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const projs = await Proj.get(req.params.id);
+        const projs = await Proj.get(req.body);
         res.status(200).json(projs);
     } catch(error) {
         console.log(error);
         res.status(500).json({
-            message: 'Internal error. Cannot retrieve data'
-        })
+            message: 'Internal error. Cannot retrieve data.'
+        });
     }
 });
 
@@ -30,8 +30,8 @@ router.get('/:id', async (req, res) => {
     } catch(error) {
         console.log(error);
         res.status(500).json({
-            message: 'Internal error. Cannot retrieve data'
-        })
+            message: 'Internal error. Cannot retrieve data.'
+        });
     }
 });
 
@@ -44,8 +44,8 @@ router.post('/', async (req, res) => {
     } catch(error) {
         console.log(error);
         res.status(500).json({
-            message: 'Internal error. Cannot add data'
-        })
+            message: 'Internal error. Cannot add data.'
+        });
     }
 });
 
@@ -62,8 +62,8 @@ router.post('/:id', async (req, res) => {
     } catch(error) {
         console.log(error);
         res.status(500).json({
-            message: 'Internal error. Cannot add data'
-        })
+            message: 'Internal error. Cannot add data.'
+        });
     }
 });
 
@@ -77,7 +77,7 @@ router.put('/', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot update data'
-        })
+        });
     }
 });
 
@@ -95,7 +95,7 @@ router.put('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot update data'
-        })
+        });
     }
 });
 
@@ -104,8 +104,11 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     try {
         const delId = await Proj.remove(req.params.id);
-        if(delId <= 0) {
-          res.status(200).json(projs);
+        if(delId > 0) {
+          res.status(200).json({
+              message: 'The project has been removed',
+              projs
+          });
         } else {
             res.status(404).json({
                 message: 'This project could not be found. Please try again.'
@@ -115,7 +118,7 @@ router.delete('/:id', async (req, res) => {
         console.log(error);
         res.status(500).json({
             message: 'Internal error. Cannot remove data'
-        })
+        });
     }
 });
 
