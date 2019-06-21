@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try {
-        const action = await Actions.get();
+        const action = await Action.get();
         res.status(200).json(action);
     } catch(error) {
         console.log(error);
@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const action = await Actions.get(req.params.id);
+        const action = await Action.get(req.params.id);
         if(action) {
             res.status(200).json(action)
         } else {
@@ -40,7 +40,8 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-
+        const action = await Action.insert(req.body);
+        res.status(201).json(action);
     } catch(error) {
         console.log(error);
         res.status(500).json({

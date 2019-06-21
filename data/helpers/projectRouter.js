@@ -1,7 +1,6 @@
 const express = require('express');
 
 const Proj = require('./projectModel');
-const Actions = require('./actionModel');
 const router = express.Router();
 
 // ============ GET ================
