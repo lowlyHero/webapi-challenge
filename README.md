@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+-- Middleware and routers
+
 - [ ] Describe Middleware?
+
+-- There are 3 types of middleware: Built-In, Third-Party, and Custom made. One of the biggest parts of Express.
 
 - [ ] Describe a Resource?
 
+-- Managed by endpoints that are published with the server software
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+--res.status(200)
+
 - [ ] How can we partition our application into sub-applications?
+
+-- Using Express routers. 
 
 ## Project Setup
 
